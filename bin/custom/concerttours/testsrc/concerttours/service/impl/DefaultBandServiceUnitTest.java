@@ -6,6 +6,9 @@ import de.hybris.bootstrap.annotations.UnitTest;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import org.junit.Before;
 import org.junit.Test;
 import concerttours.daos.BandDAO;
@@ -70,6 +73,7 @@ public class DefaultBandServiceUnitTest {
         assertEquals("We should find one", 1, result.size());
         assertEquals("And should equals what the mock returned", bandModel, result.get(0));
     }
+
     @Test
     public void testGetBand() {
 
@@ -80,5 +84,20 @@ public class DefaultBandServiceUnitTest {
         final BandModel result = bandService.getBandForCode(BAND_CODE);
         // We then verify that the result returned from the Service is the same as that returned from the DAO
         assertEquals("Band should equals() what the mock returned", bandModel, result);
+    }
+
+    @Test(expected = UnknownIdentifierException.class)
+    public void testGetBand_WithBlankParameter_ShouldTrowException() {
+
+        when(bandDAO.findBandsByCode("")).thenReturn(Collections.EMPTY_LIST);
+        final BandModel result = bandService.getBandForCode(BAND_CODE);
+    }
+
+    @Test(expected = AmbiguousIdentifierException.class)
+    public void testGetBand_DaoReturnSeveralModelObjects_ShouldTrowException() {
+
+        final List<BandModel> bandModels = Arrays.asList(bandModel, bandModel);
+        when(bandDAO.findBandsByCode(BAND_CODE)).thenReturn(bandModels);
+        final BandModel result = bandService.getBandForCode(BAND_CODE);
     }
 }
