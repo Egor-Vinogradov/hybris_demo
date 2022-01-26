@@ -15,7 +15,9 @@
       <p>Tour History:</p>
         <ul>
           <c:forEach var="tour" items="${band.tours}">
-            <li><a href="../tours/${tour.id}">${tour.tourName}</a>(number of concerts: ${tour.numberOfConcerts})</li>
+            <li>
+              <a href="../tours/${tour.id}">${tour.tourName}</a>(number of concerts: ${tour.numberOfConcerts})
+            </li>
           </c:forEach>
         </ul>
       <a href="../bands">Back to Band List</a>

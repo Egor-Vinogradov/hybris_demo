@@ -21,6 +21,7 @@ public class ConcerttoursCustomSetup
     {
         this.importService = importService;
     }
+
     @SystemSetup(type = SystemSetup.Type.ESSENTIAL)
     public boolean putInMyEssentialData()
     {
