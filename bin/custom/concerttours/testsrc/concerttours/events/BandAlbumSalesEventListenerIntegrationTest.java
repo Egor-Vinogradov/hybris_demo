@@ -50,6 +50,9 @@ public class BandAlbumSalesEventListenerIntegrationTest extends ServicelayerTest
         band.setHistory(BAND_HISTORY);
         band.setAlbumSales(MANY_ALBUMS_SOLD);
         modelService.save(band);
+
+        Thread.sleep(2000L);
+
         final NewsModel news = findLastNews();
         Assert.assertTrue("Unexpected news: " + news.getHeadline(), news.getHeadline().contains(BAND_NAME));
     }
