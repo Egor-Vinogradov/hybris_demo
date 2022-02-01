@@ -28,4 +28,9 @@ INSERT_UPDATE Concert;code[unique=true];name;date[dateformat=dd.MM.yyyy];venue;c
                      ;20170105;Grand Tour - Boulder;07.01.2023;"hybris Boulder, USA";indoor;201701;
                      ;20170106;Grand Tour - Boston;01.01.2023;"hybris Boston, USA";;201701;
 
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];name;band(code);hashtag[lang=en];hashtag[lang=de];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+                     ;201701;The Grand Little Tour;A001;GrandLittle;GrossWenig;;x;y;pieces;;Concert
+
+
 

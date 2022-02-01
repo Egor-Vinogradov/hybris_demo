@@ -39,7 +39,7 @@ public class DefaultBandFacadeUnitTest {
         band.setCode(BAND_CODE);
         band.setName(BAND_NAME);
         band.setAlbumSales(ALBUMS_SOLD);
-        band.setHistory(BAND_HISTORY);
+//        band.setHistory(BAND_HISTORY);
         return band;
     }
 
@@ -87,7 +87,7 @@ public class DefaultBandFacadeUnitTest {
         Assert.assertEquals(band.getCode(), dto.get(0).getId());
         Assert.assertEquals(band.getName(), dto.get(0).getName());
         Assert.assertEquals(band.getAlbumSales(), dto.get(0).getAlbumsSold());
-        Assert.assertEquals(band.getHistory(), dto.get(0).getDescription());
+//        Assert.assertEquals(band.getHistory(), dto.get(0).getDescription());
     }
 
     @Test
@@ -105,6 +105,6 @@ public class DefaultBandFacadeUnitTest {
         Assert.assertEquals(band.getCode(), dto.getId());
         Assert.assertEquals(band.getName(), dto.getName());
         Assert.assertEquals(band.getAlbumSales(), dto.getAlbumsSold());
-        Assert.assertEquals(band.getHistory(), dto.getDescription());
+//        Assert.assertEquals(band.getHistory(), dto.getDescription());
     }
 }
