@@ -7,13 +7,13 @@
 		-->
 
 		<path dir="${HYBRIS_BIN_DIR}" />
-
+		<extension name="concerttours" />
+		<extension name="platformbackoffice"/>
 
 										
 		<!-- ext-template -->
 		<extension name="yempty" />
 		<extension name="yhacext" />
-		<extension name="concerttours" />
 
 
 	</extensions>
