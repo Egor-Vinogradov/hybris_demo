@@ -6,6 +6,8 @@ import de.hybris.bootstrap.annotations.UnitTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import de.hybris.platform.servicelayer.internal.model.impl.LocaleProvider;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
