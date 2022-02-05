@@ -27,6 +27,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
                    ;bandDetail;omphaBig.jpg;$siteResource/rockBig.jpg;;
                    ;bandList;orchestraSmall.jpg;$siteResource/rockSmall.jpg;;
                    ;bandDetail;orchestraBig.jpg;$siteResource/rockBig.jpg;;
+
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
                             ;yRockImage;rockSmall.jpg,rockBig.jpg;
                             ;yBandImage;danceSmall.jpg,danceBig.jpg;
