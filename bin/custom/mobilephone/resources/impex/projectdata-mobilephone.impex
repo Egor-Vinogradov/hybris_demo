@@ -1,0 +1,31 @@
+$productCatalog=mobilephoneProductCatalog
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+# Product catalog
+INSERT_UPDATE Catalog;id[unique=true]
+                     ;$productCatalog
+
+# Product cataog version
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode);readPrincipals(uid)
+                            ;$productCatalog;Online;true;en;employeegroup
+
+INSERT_UPDATE Brand;code[unique=true];name[unique=true]
+                   ;20170101;Apple
+                   ;20170102;Samsung
+
+INSERT_UPDATE Series;code[unique=true];name[unique=true];brand(code)
+                    ;3000001;Galaxy S;20170102
+                    ;3000002;Galaxy A;20170102
+                    ;3000003;Galaxy M;20170102
+                    ;3000004;Galaxy Z;20170102
+
+INSERT_UPDATE Product;code[unique=true];name;series(code);hashtag[lang=en];hashtag[lang=de];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+                     ;301701;Mobile Phone series S;3000001;SamsungS;SamsungS;;x;y;pieces;;Phone
+
+INSERT_UPDATE Phone;code[unique=true];name;namePhoneModel;internalStorage(code);oS(code);baseProduct(code);$catalogVersion;$approved
+                     ;4000001;Samsung Galaxy S20 FE 6/128Gb G780 red;"Samsung Galaxy S20 FE 6/128Gb G780 red";GB128;android;301701
+                     ;4000002;Samsung Galaxy S20 FE 6/64Gb G780 red;"Samsung Galaxy S20 FE 6/64Gb G780 red";GB64;android;301701
+                     ;4000003;Samsung Galaxy S20 FE 6/256Gb G780 red;"Samsung Galaxy S20 FE 6/256Gb G780 red";GB256;android;301701

@@ -8,6 +8,7 @@
 
 		<path dir="${HYBRIS_BIN_DIR}" />
 		<extension name="concerttours" />
+		<extension name="mobilephone" />
 		<extension name="platformbackoffice"/>
 
 										

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="InternalStorage" autocreate="true" generate="true" dynamic="false">
+			<value code="GB64" />
+			<value code="GB128" />
+			<value code="GB256" />
+			<value code="GB512" />
+			<value code="GB1024" />
+		</enumtype>
+
+		<enumtype code="OS" autocreate="true" generate="true" dynamic="true">
+			<value code="iOS" />
+			<value code="android" />
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+		<relation code="Series2Brand" autocreate="true" localized="false">
+			<sourceElement qualifier="series" type="Series" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="brand" type="Brand" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation code="Product2Series" autocreate="true" localized="false">
+			<sourceElement qualifier="products" type="Product" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="series" type="Series" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+		<itemtype generate="true" code="Phone" extends="VariantProduct" autocreate="true">
+			<attributes>
+				<attribute qualifier="namePhoneModel" type="java.lang.String">
+					<description>model phone name</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="internalStorage" type="InternalStorage">
+					<description>internal storage from phone</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="oS" type="OS">
+					<description>OS from phone</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="Series" autocreate="true">
+			<deployment table="Series" typecode="30302" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>short unique code of series</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<description>name of series</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="Brand" autocreate="true">
+			<deployment table="Brands" typecode="30301" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>short unique code of brand</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<description>name of brand</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

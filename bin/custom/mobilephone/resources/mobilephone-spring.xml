@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="defaultPhoneFacade" alias="phoneFacade" />
+    <bean id="defaultPhoneFacade" class="mobilephone.facades.impl.DefaultPhoneFacade" >
+        <property name = "productService" ref = "productService" />
+        <property name = "productConverter" ref = "productConverter" />
+    </bean>
+
+    <bean id="productConverter" class="mobilephone.converters.ProductConverter">
+<!--        <property name="populators">-->
+<!--            <list>-->
+<!--                <ref bean="phoneSummaryPopulator"/>-->
+<!--            </list>-->
+<!--        </property>-->
+    </bean>
+
+    <bean id="phoneSummaryPopulator" class="mobilephone.converters.populators.PhoneSummaryPopulator"/>
+	
+    <bean id="mobilephoneSystemSetup" class="mobilephone.setup.MobilephoneSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="mobilephoneService"/>
+    </bean>
+
+    <bean id="mobilephoneService" class="mobilephone.service.impl.DefaultMobilephoneService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+</beans>
