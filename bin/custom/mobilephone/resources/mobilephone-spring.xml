@@ -14,16 +14,24 @@
         <property name = "productConverter" ref = "productConverter" />
     </bean>
 
-    <bean id="productConverter" class="mobilephone.converters.ProductConverter">
-<!--        <property name="populators">-->
-<!--            <list>-->
-<!--                <ref bean="phoneSummaryPopulator"/>-->
-<!--            </list>-->
-<!--        </property>-->
+    <bean id="productConverter" class="mobilephone.converters.ProductConverter"/>
+
+    <alias name="phoneConverter" alias="phoneConverter" />
+    <bean id="phoneConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="mobilephone.data.PhoneSummaryData"/>
+        <property name="populators">
+            <list>
+                <ref bean="phonePopulator" />
+                <ref bean="phoneOSPopulator" />
+                <ref bean="phoneISPopulator" />
+            </list>
+        </property>
     </bean>
 
-    <bean id="phoneSummaryPopulator" class="mobilephone.converters.populators.PhoneSummaryPopulator"/>
-	
+    <bean id="phoneOSPopulator" class="mobilephone.converters.populators.PhoneOSPopulator"/>
+    <bean id="phonePopulator" class="mobilephone.converters.populators.PhonePopulator"/>
+    <bean id="phoneISPopulator" class="mobilephone.converters.populators.PhoneISPopulator"/>
+
     <bean id="mobilephoneSystemSetup" class="mobilephone.setup.MobilephoneSystemSetup">
         <!-- constructor arg injection example -->
         <constructor-arg ref="mobilephoneService"/>

@@ -1,5 +1,6 @@
 package mobilephone.facades.impl;
 
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import mobilephone.data.PhoneSummaryData;
 import mobilephone.facades.PhoneDetailsFacade;
 import mobilephone.model.PhoneModel;
@@ -10,23 +11,16 @@ import org.springframework.stereotype.Component;
 public class DefaultPhoneDetailsFacade implements PhoneDetailsFacade {
 
     private final PhoneDetailsService phoneDetailsService;
+    private final Converter<PhoneModel, PhoneSummaryData> phoneConverter;
 
-    public DefaultPhoneDetailsFacade(PhoneDetailsService phoneDetailsService) {
+    public DefaultPhoneDetailsFacade(PhoneDetailsService phoneDetailsService,
+                                     Converter<PhoneModel, PhoneSummaryData> phoneConverter) {
         this.phoneDetailsService = phoneDetailsService;
+        this.phoneConverter = phoneConverter;
     }
 
     @Override
     public PhoneSummaryData getPhone(String code) {
-        PhoneSummaryData phone = new PhoneSummaryData();
-        PhoneModel phoneModel = this.phoneDetailsService.getPhoneForCode(code);
-
-        // add converter and populator
-
-
-        phone.setId(phoneModel.getCode());
-        phone.setInternalStorage(phoneModel.getInternalStorage().getCode());
-        phone.setOS(phoneModel.getOS().getCode());
-        phone.setName(phoneModel.getNamePhoneModel());
-        return phone;
+        return this.phoneConverter.convert(this.phoneDetailsService.getPhoneForCode(code));
     }
 }

@@ -30,7 +30,7 @@ public class ProductConverter implements Converter<ProductModel, PhoneData> {
                     PhoneModel phoneModel = (PhoneModel) variant;
 
                     PhoneSummaryData phone = new PhoneSummaryData();
-//                    populate(phoneModel, phone);
+
                     phone.setId(phoneModel.getCode());
                     phone.setName(phoneModel.getNamePhoneModel());
                     phone.setInternalStorage(phoneModel.getInternalStorage().getCode());
