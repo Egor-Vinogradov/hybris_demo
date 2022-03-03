@@ -15,5 +15,25 @@
         <property name="name" type="String" />
         <property name="internalStorage" type="String" />
         <property name="oS" type="String" />
+        <property name="brand" type="String" />
+        <property name="series" type="String" />
+        <property name="baseProduct" type="String" />
+    </bean>
+
+    <bean class="mobilephone.data.OrderPhoneData">
+        <property name="id" type="String" />
+        <property name="phoneName" type="String" />
+        <property name="phoneID" type="String" />
+        <property name="quantity" type="Integer" />
+        <property name="dateCreate" type="String" />
+    </bean>
+
+    <bean class="mobilephone.data.EventCreatOrderData">
+        <property name="code" type="String" />
+        <property name="namePhoneModel" type="String" />
+        <property name="quantity" type="String" />
+        <property name="date" type="String" />
+        <property name="initiator" type="String" />
+        <property name="sendMale" type="String" />
     </bean>
 </beans>

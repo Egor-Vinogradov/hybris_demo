@@ -5,8 +5,6 @@ import mobilephone.model.PhoneModel;
 import mobilephone.service.PhoneDetailsService;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component(value = "phoneDetailsService")
 public class DefaultPhoneDetailsService implements PhoneDetailsService {
 

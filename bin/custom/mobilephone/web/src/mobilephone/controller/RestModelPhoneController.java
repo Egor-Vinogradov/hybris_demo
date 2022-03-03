@@ -8,13 +8,10 @@ import mobilephone.facades.PhoneFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class RestModelPhone {
+public class RestModelPhoneController {
 
     private final PhoneFacade phoneFacade;
     private final PhoneDetailsFacade phoneDetailsFacade;
@@ -25,7 +22,8 @@ public class RestModelPhone {
 
     private final CatalogVersionService catalogVersionService;
 
-    public RestModelPhone(PhoneFacade phoneFacade, PhoneDetailsFacade phoneDetailsFacade, CatalogVersionService catalogVersionService) {
+    public RestModelPhoneController(PhoneFacade phoneFacade, PhoneDetailsFacade phoneDetailsFacade,
+                                    CatalogVersionService catalogVersionService) {
         this.phoneFacade = phoneFacade;
         this.phoneDetailsFacade = phoneDetailsFacade;
         this.catalogVersionService = catalogVersionService;

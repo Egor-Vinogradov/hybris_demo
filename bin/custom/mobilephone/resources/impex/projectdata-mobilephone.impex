@@ -29,3 +29,7 @@ INSERT_UPDATE Phone;code[unique=true];name;namePhoneModel;internalStorage(code);
                      ;4000001;Samsung Galaxy S20 FE 6/128Gb G780 red;"Samsung Galaxy S20 FE 6/128Gb G780 red";GB128;android;301701
                      ;4000002;Samsung Galaxy S20 FE 6/64Gb G780 red;"Samsung Galaxy S20 FE 6/64Gb G780 red";GB64;android;301701
                      ;4000003;Samsung Galaxy S20 FE 6/256Gb G780 red;"Samsung Galaxy S20 FE 6/256Gb G780 red";GB256;android;301701
+
+INSERT_UPDATE OrderPhone;code[unique=true];phone(code);quantity;dateCreate[dateformat=dd.MM.yyyy]
+                   ;5000001;4000003;2;15.02.2022
+                   ;5000002;4000002;4;16.02.2022

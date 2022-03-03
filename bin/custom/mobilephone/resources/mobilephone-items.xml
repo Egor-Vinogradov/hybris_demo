@@ -16,6 +16,12 @@
 			<value code="iOS" />
 			<value code="android" />
 		</enumtype>
+		
+		<enumtype code="Initiator" autocreate="true" generate="true" dynamic="false">
+			<value code="event"></value>
+			<value code="interceptor"></value>
+		</enumtype>
+
 	</enumtypes>
 
 	<relations>
@@ -50,6 +56,47 @@
 				</attribute>
 				<attribute qualifier="oS" type="OS">
 					<description>OS from phone</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="EventCreatOrder" generate="true" autocreate="true">
+			<deployment table="eventCreatOrder" typecode="30304" />
+			<attributes>
+				<attribute qualifier="phone" type="Phone">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="quantity" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="dateCreate" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="initiator" type="Initiator">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sendMail" type="java.lang.Boolean">
+					<defaultvalue>false</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="OrderPhone" autocreate="true">
+			<deployment table="OrderPhone" typecode="30303" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>unique code of orders</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="quantity" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="dateCreate" type="java.util.Date">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="phone" type="Phone">
 					<persistence type="property" />
 				</attribute>
 			</attributes>

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/aop
-           http://www.springframework.org/schema/aop/spring-aop.xsd">
+           http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="mobilephone"/>
 
     <alias name="defaultPhoneFacade" alias="phoneFacade" />
     <bean id="defaultPhoneFacade" class="mobilephone.facades.impl.DefaultPhoneFacade" >
@@ -15,6 +18,7 @@
     </bean>
 
     <bean id="productConverter" class="mobilephone.converters.ProductConverter"/>
+    <bean id="OrderPhoneConverter" class="mobilephone.converters.OrderPhoneConverter"/>
 
     <alias name="phoneConverter" alias="phoneConverter" />
     <bean id="phoneConverter" parent="abstractPopulatingConverter">
@@ -24,17 +28,43 @@
                 <ref bean="phonePopulator" />
                 <ref bean="phoneOSPopulator" />
                 <ref bean="phoneISPopulator" />
+                <ref bean="phoneBrandSeriesPopulator" />
             </list>
         </property>
     </bean>
 
+<!--    <bean id="productPhoneConverter" class="mobilephone.converters.ProductPhoneConverter">-->
+<!--&lt;!&ndash;        <property name="phoneDetailsService" ref="phoneDetailsService" />&ndash;&gt;-->
+<!--    </bean>-->
+
     <bean id="phoneOSPopulator" class="mobilephone.converters.populators.PhoneOSPopulator"/>
     <bean id="phonePopulator" class="mobilephone.converters.populators.PhonePopulator"/>
     <bean id="phoneISPopulator" class="mobilephone.converters.populators.PhoneISPopulator"/>
+    <bean id="phoneBrandSeriesPopulator" class="mobilephone.converters.populators.PhoneBrandSeriesPopulator"/>
 
     <bean id="mobilephoneSystemSetup" class="mobilephone.setup.MobilephoneSystemSetup">
         <!-- constructor arg injection example -->
         <constructor-arg ref="mobilephoneService"/>
+    </bean>
+
+    <bean id="orderPhoneInterceptor" class="mobilephone.interceptors.OrderPhoneInterceptor" />
+    <bean id="OrderPhoneInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping" >
+        <property name="interceptor" ref="orderPhoneInterceptor" />
+        <property name="typeCode" value="OrderPhone" />
+    </bean>
+
+
+    <bean id="interceptorListener" class="mobilephone.interceptors.InterceptorListener" parent="abstractEventListener" >
+        <property name="modelService" ref="modelService"/>
+        <property name = "productService" ref = "productService" />
+    </bean>
+
+    <bean id="eventCreatOrderService" class="mobilephone.service.impl.DefaultEventCreatOrderService">
+        <property name="eventCreatOrderDAO" ref="eventCreatOrderDAO" />
+    </bean>
+
+    <bean id="sendEventJob" class="mobilephone.jobs.SendEventJob" parent="abstractJobPerformable">
+        <property name="eventCreatOrderService" ref="eventCreatOrderService" />
     </bean>
 
     <bean id="mobilephoneService" class="mobilephone.service.impl.DefaultMobilephoneService">
